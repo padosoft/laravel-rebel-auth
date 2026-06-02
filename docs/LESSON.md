@@ -27,6 +27,16 @@ Lezione: PHP 8.4.21, Composer 2.9.7, Node 25 / npm 11.6, `gh` autenticato (lopad
 Contesto: gate GitHub della PR macro→main prevede Copilot come reviewer.
 Lezione: richiede Copilot code review abilitato sul repo/org e `gh >= 2.88`. Alla prima PR verificare che la richiesta parta (`gh pr view <n> --json reviewRequests,reviews`). Se non disponibile, il gate primario resta la **review Copilot LOCALE** + CI verdi; annotare qui l'esito reale e procedere.
 
+## [2026-06-02] #6 — PowerShell gotchas (da review Copilot su scripts)
+Contesto: prima review Copilot locale (costo 11.7 credits, ~1min) sui miei script PS.
+Lezioni (valide per tutti gli script futuri):
+- `$array | Measure-Object -Line` ritorna **0** su array di stringhe (`-Line` conta i `\n` *dentro* le stringhe). Per contare gli elementi usa `($array).Count`.
+- `Out-File -Encoding utf8` su PS5.x scrive **con BOM**. Per file passati ad altri tool usa `[System.IO.File]::WriteAllText($p, $text, [System.Text.UTF8Encoding]::new($false))` (no BOM, cross-versione).
+- Dopo `git`/`gh` controllare **`$LASTEXITCODE`** (gli errori non lanciano eccezioni in PS): es. `gh pr create` fallito lascia `$num` errato.
+- `Copy-Item` aggiungere `-ErrorAction Stop`; verificare `Test-Path` su sorgente e root.
+- Quota `'@copilot'` nei comandi `gh` (sicuro anche in bash/zsh).
+Processo: la review Copilot LOCALE funziona e trova bug reali → tenerla sempre nel loop.
+
 ## [2026-06-02] #5 — README didattici (requisito di prodotto)
 Contesto: indicazione utente. L'ecosistema è complesso/enterprise.
 Lezione: ogni README deve essere **prolisso e didattico** per junior/non-esperti di auth: spiegare cosa fa, come funziona (passo-passo + ASCII), come si monta, OGNI opzione di config (tabella), e **molti esempi** (≥4-6 per package). Glossario dei termini (OTP, step-up, AAL, passkey, dynamic linking). Meglio "troppo spiegato" che criptico.

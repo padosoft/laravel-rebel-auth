@@ -22,7 +22,7 @@ Laravel 12+13, PHP 8.3/8.4/8.5. `illuminate/support: ^12.0|^13.0`, `php: ^8.3`. 
 4. Commit on the macro branch. Update `docs/PROGRESS.md` (+ `docs/LESSON.md` if learned something).
 
 ## The gate (once per macro-task, PR macro→main)
-`git push` → `gh pr create` → `gh pr edit <n> --add-reviewer @copilot` (verify started) → wait CI green + Copilot comments → merge `--squash` (or fix-loop) → update `LESSON.md` → `git tag vX.Y.Z` + `gh release create`. Helper: `scripts/pr.ps1`.
+`git push` → `gh pr create` → `gh pr edit <n> --add-reviewer '@copilot'` (verify started) → wait CI green + Copilot comments → merge `--squash` (or fix-loop) → update `LESSON.md` → `git tag vX.Y.Z` + `gh release create`. Helper: `scripts/pr.ps1`.
 
 ## Non-negotiables
 - One branch + one PR per macro-task. Sub-tasks are local commits.

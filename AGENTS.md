@@ -29,7 +29,7 @@
 
 ### Gate GitHub UNA volta (PR macro→main)
 1. `git push` del branch; `gh pr create` (feat/<macro> → main).
-2. `gh pr edit <n> --add-reviewer @copilot` + verifica review partita (`gh pr view <n> --json reviewRequests,reviews`).
+2. `gh pr edit <n> --add-reviewer '@copilot'` + verifica review partita (`gh pr view <n> --json reviewRequests,reviews`). *(quota `'@copilot'` per sicurezza in bash/zsh)*
 3. Attendi **CI tutti verdi** + commenti Copilot completati.
 4. Verde + 0 commenti aperti → `gh pr merge --squash`. Altrimenti fixa (test + commenti), push, **richiama nuova review**, ripeti.
 5. Aggiorna `docs/LESSON.md` con gli insight di Copilot. Poi `git tag vX.Y.Z` + `gh release create`.
