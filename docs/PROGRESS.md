@@ -5,16 +5,16 @@
 ## Stato corrente
 - **Sessione:** 2026-06-02
 - **Round automode:** fino a `admin-api` incluso, poi STOP prima di `admin` (chiedere path template).
-- **Macro-task in corso:** **T0 — Governance bootstrap** (repo `laravel-rebel-auth`, branch `chore/governance`).
-- **Prossimo:** completare T0 (PR→main), poi T1 `core`.
+- **Macro-task in corso:** **T1 — core** (prossimo). T0 governance ✅ mergeato (PR #1).
+- **Gate review:** `@copilot` GitHub non disponibile (vedi LESSON #4) → gate = **review Copilot LOCALE** (`scripts/cr.ps1`) + CI.
 
 ## Cosa sto facendo ORA
-T0: creazione file di governance (LESSON, PROGRESS, AGENTS, CLAUDE, skill, scripts, banner) nel repo meta `laravel-rebel-auth`, branch `chore/governance`. Poi PR→main + merge.
+Avvio **T1 `laravel-rebel-core`**: skeleton (composer, ServiceProvider spatie, CI, pint/phpstan/pest) + ADR design-lock + value objects/contratti. Branch `feat/core`.
 
 ## Tabella macro-task (questo round)
 | # | Package | Repo | Branch | Stato |
 |---|---|---|---|---|
-| T0 | governance | laravel-rebel-auth | chore/governance | 🔄 in corso |
+| T0 | governance | laravel-rebel-auth | chore/governance | ✅ done (PR #1) |
 | T1 | core | laravel-rebel-core | feat/core | ⬜ da fare |
 | T2 | email-otp | laravel-rebel-email-otp | feat/email-otp | ⬜ |
 | T3 | bridge-fortify | laravel-rebel-bridge-fortify | feat/bridge-fortify | ⬜ |

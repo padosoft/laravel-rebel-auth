@@ -23,9 +23,11 @@ Lezione: sorgente = `C:\Users\lopad\Downloads\laravel-rebel\Laravel-Rebel-banner
 Contesto: ambiente Windows + xampp.
 Lezione: PHP 8.4.21, Composer 2.9.7, Node 25 / npm 11.6, `gh` autenticato (lopadova, SSH), `copilot.exe` (WinGet). Target package: **Laravel 12+13, PHP 8.3/8.4/8.5**; Testbench `^10|^11`, Pest 4, Larastan 3 (PHPStan max), Pint. Repo in `C:\xampp\htdocs\laravel-rebel-*`, branch `main`, remote SSH.
 
-## [2026-06-02] #4 — `gh ... --add-reviewer @copilot` da verificare
-Contesto: gate GitHub della PR macro→main prevede Copilot come reviewer.
-Lezione: richiede Copilot code review abilitato sul repo/org e `gh >= 2.88`. Alla prima PR verificare che la richiesta parta (`gh pr view <n> --json reviewRequests,reviews`). Se non disponibile, il gate primario resta la **review Copilot LOCALE** + CI verdi; annotare qui l'esito reale e procedere.
+## [2026-06-02] #4 — `@copilot` reviewer NON disponibile su questo repo/account → gate = review LOCALE + CI
+Contesto: PR #1 (laravel-rebel-auth). gh 2.88.0.
+**VERIFICATO:** `gh pr edit <n> --add-reviewer '@copilot'` → **exit 0 ma non aggiunge nulla** (`reviewRequests` resta `[]`, no-op silenzioso). `--add-reviewer 'Copilot'` → **errore** `GraphQL: Could not resolve user with login 'copilot' (requestReviewsByLogin)`.
+Conclusione: la **Copilot code review lato GitHub non è abilitata** per org/repo `padosoft` (è una feature di piano/impostazioni repo). Finché non viene abilitata dall'utente nelle settings del repo/org, **il gate di review è la review Copilot LOCALE** (`scripts/cr.ps1`, già nel loop) **+ CI verdi**. `pr.ps1` continua a *tentare* l'aggiunta (no-op innocuo) e mostra lo stato.
+**AZIONE UTENTE (opzionale):** abilitare "Copilot code review" su GitHub per avere anche la review automatica sulle PR; nel frattempo si procede col gate locale+CI.
 
 ## [2026-06-02] #6 — PowerShell gotchas (da review Copilot su scripts)
 Contesto: prima review Copilot locale (costo 11.7 credits, ~1min) sui miei script PS.
