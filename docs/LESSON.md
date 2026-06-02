@@ -39,6 +39,20 @@ Lezioni (valide per tutti gli script futuri):
 - Quota `'@copilot'` nei comandi `gh` (sicuro anche in bash/zsh).
 Processo: la review Copilot LOCALE funziona e trova bug reali → tenerla sempre nel loop.
 
+## [2026-06-02] #7 — PHPStan level max: niente cast su `mixed`, niente `@var` override
+Contesto: T1 core, PHPStan max segnalava `cast.int`/`cast.string` su `(int)/(string) Config::get()`.
+Lezioni:
+- `Config::get()` ritorna **mixed**: castarlo a int/string è errore a level max (e la config strict vieta `@var`/cast/`assert` per zittire).
+- Pattern corretto: risolvi un **tipo concreto** dal container — `$app->make(\Illuminate\Contracts\Config\Repository::class)` è **tipizzato da Larastan** come `Repository` (niente `@var`). Poi **narrowing** con `is_int()/is_string()/is_array()` invece di cast: `$v = is_int($x) ? $x : 1;`.
+- Per array tipizzati (es. `array<int,string>` da config) costruisci con un `foreach` filtrante (`if (is_int($k) && is_string($v))`) invece di `(array)$x` + `@var`.
+
+## [2026-06-02] #8 — Eseguire i binari vendor su Windows/pwsh
+Contesto: `& "$repo\vendor\bin\phpstan"` → errore "Cannot run a document in the middle of a pipeline" (script senza estensione).
+Lezione: usa **`composer <script> --working-dir=$repo`** (pest/phpstan/pint) oppure `php "$repo\vendor\bin\xxx"`. Per leggere errori PHPStan: redirigi `*>&1 | Out-File tmp` e poi `Get-Content`/`Select-String` (il footer mostra solo il riepilogo).
+
+## [2026-06-02] #9 — La review Copilot locale trova bug di design reali
+Contesto: review sul diff core (~1300 righe, ~25 credits, ~1.5min). Findings utili: validare l'algo HMAC nel costruttore (fail fast), campo `restricted` era dead-code (aggiunto `rejectRestricted` a `satisfies()`), masking email a 1 char rivelava tutta la local part. Uno (timing su keyVersion) era **non-issue** (keyVersion non è segreta) → documentato, non "aggiustato" a caso. Lezione: valutare ogni commento nel merito (skill receiving-code-review), accettare i validi con test, respingere i falsi con motivazione scritta.
+
 ## [2026-06-02] #5 — README didattici (requisito di prodotto)
 Contesto: indicazione utente. L'ecosistema è complesso/enterprise.
 Lezione: ogni README deve essere **prolisso e didattico** per junior/non-esperti di auth: spiegare cosa fa, come funziona (passo-passo + ASCII), come si monta, OGNI opzione di config (tabella), e **molti esempi** (≥4-6 per package). Glossario dei termini (OTP, step-up, AAL, passkey, dynamic linking). Meglio "troppo spiegato" che criptico.
