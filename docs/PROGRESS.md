@@ -5,11 +5,14 @@
 ## Stato corrente
 - **Sessione:** 2026-06-02
 - **Round automode:** fino a `admin-api` incluso, poi STOP prima di `admin` (chiedere path template).
-- **Macro-task in corso:** **T1 — core** (prossimo). T0 governance ✅ mergeato (PR #1).
-- **Gate review:** `@copilot` GitHub non disponibile (vedi LESSON #4) → gate = **review Copilot LOCALE** (`scripts/cr.ps1`) + CI.
+- **Macro-task in corso:** **T1 — core** (branch `feat/core`). T0 governance ✅ mergeato (PR #1).
+- **T1.0 skeleton ✅ committato** + **toolchain VALIDATO green**: Pest 4 ✓, PHPStan max ✓, Pint ✓ (Laravel 13.13, Testbench 11, Larastan 3, pest-plugin-laravel 4.1).
+- **Prossimo:** T1.1 value objects (`AuthIdentifier`/Email/Phone), T1.2 assurance AAL/AMR + TransactionContext, ... T1.9 README ecosistema.
+- **Gate review:** utente ha **Copilot Plus** → ritentare review `@copilot` sulla PR di `core` (LESSON #4). Backup: review Copilot LOCALE (`scripts/cr.ps1`).
+- **Novità piano:** READMEs didattici + setup provider/`.env.example` su tutti i package; suite test "live" (Twilio/Mailtrap free tier, secrets CI); nuovo package **T13 `laravel-rebel-demo`** (app L13 integrazione, cresce incrementale).
 
 ## Cosa sto facendo ORA
-Avvio **T1 `laravel-rebel-core`**: skeleton (composer, ServiceProvider spatie, CI, pint/phpstan/pest) + ADR design-lock + value objects/contratti. Branch `feat/core`.
+**T1 `laravel-rebel-core`**: skeleton fatto e verde. Procedo con value objects (T1.1+), ADR-0005 design-lock e contratti.
 
 ## Tabella macro-task (questo round)
 | # | Package | Repo | Branch | Stato |
