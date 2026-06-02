@@ -27,7 +27,11 @@ Lezione: PHP 8.4.21, Composer 2.9.7, Node 25 / npm 11.6, `gh` autenticato (lopad
 Contesto: PR #1 (laravel-rebel-auth). gh 2.88.0.
 **VERIFICATO:** `gh pr edit <n> --add-reviewer '@copilot'` → **exit 0 ma non aggiunge nulla** (`reviewRequests` resta `[]`, no-op silenzioso). `--add-reviewer 'Copilot'` → **errore** `GraphQL: Could not resolve user with login 'copilot' (requestReviewsByLogin)`.
 **UPDATE 2026-06-02 (utente):** l'utente HA **Copilot Plus** sul proprio account (gh loggato come lopadova) → la review `@copilot` sulle PR **dovrebbe funzionare**. Quindi il no-op precedente è probabilmente una questione di **sintassi/endpoint**, non di disponibilità. **DA RITENTARE sulla PR di `core`** provando: (a) `gh pr create ... --reviewer "@copilot"`; (b) REST API `gh api repos/OWNER/REPO/pulls/N/requested_reviewers -f 'reviewers[]=copilot-pull-request-reviewer[bot]'`; (c) verificare con `gh pr view N --json reviewRequests`. Annotare qui la forma che FUNZIONA. Nel frattempo la review Copilot LOCALE (`scripts/cr.ps1`) resta nel loop come backup.
-**AZIONE UTENTE (opzionale):** abilitare "Copilot code review" su GitHub per avere anche la review automatica sulle PR; nel frattempo si procede col gate locale+CI.
+**RISOLTO 2026-06-03 (PR core #1):** il metodo che FUNZIONA per richiedere la review di Copilot è la **REST API**, non `gh pr edit`:
+```
+gh api --method POST "repos/OWNER/REPO/pulls/N/requested_reviewers" -f "reviewers[]=copilot-pull-request-reviewer[bot]"
+```
+La risposta mostra `requested_reviewers: [{login:"Copilot", type:"Bot"}]` → richiesta andata. NB: `gh pr view --json reviewRequests` può mostrare `[]` (non elenca i bot) — verificare invece via REST (`gh api .../pulls/N` campo `requested_reviewers`) o via `gh api .../pulls/N/reviews` per la review pubblicata. `gh pr edit --add-reviewer '@copilot'` resta un **no-op silenzioso** (non usarlo). CI matrix (8.3/8.4/8.5 × L12/13 + quality) tutta verde alla prima.
 
 ## [2026-06-02] #6 — PowerShell gotchas (da review Copilot su scripts)
 Contesto: prima review Copilot locale (costo 11.7 credits, ~1min) sui miei script PS.

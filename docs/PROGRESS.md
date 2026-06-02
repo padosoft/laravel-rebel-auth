@@ -13,17 +13,16 @@
 - **Novità piano:** READMEs didattici + setup provider/`.env.example` su tutti i package; suite test "live" (Twilio/Mailtrap free tier, secrets CI); nuovo package **T13 `laravel-rebel-demo`** (app L13 integrazione, cresce incrementale).
 
 ## Cosa sto facendo ORA
-**T1 `laravel-rebel-core`** (branch `feat/core`): fatti e verdi (29 test, PHPStan max, Pint):
-- ✅ T1.0 skeleton + toolchain
-- ✅ T1.1 identifiers (Email/Phone/Generic) + ✅ T1.2 assurance (Aal/AssuranceLevel) + KeyedHasher/HmacKeyedHasher + ADR-0005
-- ✅ review Copilot locale applicata (validazione algo, rejectRestricted, masking 1-char)
-**Prossimo:** T1.3 SecurityContext/Tenant/Device · T1.4 RiskAssessment · T1.5 contratti (TokenIssuer, Clock PSR-20, SessionRegistry, DeviceTrust, BotProtection, RateLimiter, resolvers, AuditLogger) · T1.6 LoginResult/TokenPair + AuditEvent + DatabaseAuditLogger + migration `rebel_auth_events` · T1.7 fakes/redaction · T1.8 `rebel:validate-config` + BelongsToTenant · T1.9 README ecosistema → PR `feat/core→main` + tag v0.1.0.
+**T1 `laravel-rebel-core` ✅ COMPLETO** — mergeato (PR #1), **tag v0.1.0 + release**. 52 test, PHPStan max, Pint; CI verde 8.3/8.4/8.5 × L12/13; review Codex+Copilot applicate (REST API per @copilot, vedi LESSON #4).
+
+**Prossimo: T2 `laravel-rebel-email-otp`** (branch `feat/email-otp`). UI Blade login/verify → richiede Playwright. Mailtrap creds in `laravel-rebel-email-otp/.env` per test "live".
+Sottotask: T2.1 migration challenge (ULID, code_hmac+code_salt+key_version+idempotency) · T2.2 generator+hasher · T2.3 StartChallenge (anti-enum timing, idempotency, rate-limit, bot gate) · T2.4 VerifyChallenge atomico (LoginResult web|token) · T2.5 Resend · T2.6 notification+prune · T2.7 Blade views + Playwright · T2.8 README + PR + tag.
 
 ## Tabella macro-task (questo round)
 | # | Package | Repo | Branch | Stato |
 |---|---|---|---|---|
 | T0 | governance | laravel-rebel-auth | chore/governance | ✅ done (PR #1) |
-| T1 | core | laravel-rebel-core | feat/core | ⬜ da fare |
+| T1 | core | laravel-rebel-core | feat/core | ✅ done (v0.1.0) |
 | T2 | email-otp | laravel-rebel-email-otp | feat/email-otp | ⬜ |
 | T3 | bridge-fortify | laravel-rebel-bridge-fortify | feat/bridge-fortify | ⬜ |
 | T4 | step-up | laravel-rebel-step-up | feat/step-up | ⬜ |
