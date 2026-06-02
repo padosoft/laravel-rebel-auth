@@ -57,6 +57,10 @@ Lezione: usa **`composer <script> --working-dir=$repo`** (pest/phpstan/pint) opp
 ## [2026-06-02] #9 — La review Copilot locale trova bug di design reali
 Contesto: review sul diff core (~1300 righe, ~25 credits, ~1.5min). Findings utili: validare l'algo HMAC nel costruttore (fail fast), campo `restricted` era dead-code (aggiunto `rejectRestricted` a `satisfies()`), masking email a 1 char rivelava tutta la local part. Uno (timing su keyVersion) era **non-issue** (keyVersion non è segreta) → documentato, non "aggiustato" a caso. Lezione: valutare ogni commento nel merito (skill receiving-code-review), accettare i validi con test, respingere i falsi con motivazione scritta.
 
+## [2026-06-03] #10 — Dipendenze tra package (core) prima di Packagist: usare VCS repo
+Contesto: `email-otp` dipende da `padosoft/laravel-rebel-core` non ancora su Packagist.
+Lezione: nel `composer.json` del package dipendente aggiungere `"repositories": [{"type":"vcs","url":"https://github.com/padosoft/laravel-rebel-core"}]` e richiedere `"padosoft/laravel-rebel-core": "^0.1"`. Composer risolve dal **tag GitHub** (v0.1.0). Funziona **in locale e in CI** (repo pubblico, nessuna auth). Quando i package saranno su Packagist si potranno togliere le `repositories`. Il `TestCase` del package dipendente deve registrare **entrambi** i provider (core + package) e impostare un pepper di test (`rebel-core.peppers`). composer update verde, skeleton test verde.
+
 ## [2026-06-02] #5 — README didattici (requisito di prodotto)
 Contesto: indicazione utente. L'ecosistema è complesso/enterprise.
 Lezione: ogni README deve essere **prolisso e didattico** per junior/non-esperti di auth: spiegare cosa fa, come funziona (passo-passo + ASCII), come si monta, OGNI opzione di config (tabella), e **molti esempi** (≥4-6 per package). Glossario dei termini (OTP, step-up, AAL, passkey, dynamic linking). Meglio "troppo spiegato" che criptico.
