@@ -111,3 +111,13 @@ Regole operative (valgono per TUTTI i package, vecchi e nuovi):
 1. **Lingua = INGLESE** per README, CHANGELOG, `.env.example`, e d'ora in poi anche i commenti/PHPDoc del codice. Mantenere la stessa profondità didattica (glossario, ≥4-6 esempi, tabelle config complete), solo in inglese. (Memoria `docs-in-english`.)
 2. **Tabella comparativa obbligatoria** in ogni README: confronto coi concorrenti REALI che fanno cose simili — le NOSTRE feature con spunta verde ✅, quelle che mancano ai concorrenti con ✗ rossa ❌ (restare onesti: se un concorrente ha davvero una feature, non mettere una X falsa). Mostra visivamente che Rebel è più completo/potente. (Memoria `readme-comparison-tables`.)
 Fix in corso: traduzione in inglese dei README/doc già fatti (core, email-otp, step-up) via agenti in background.
+
+## [2026-06-03] #17 — Pattern provider esterni (Twilio): gateway-seam + live tests opt-in
+Contesto: T5b channel-twilio. Riutilizzabile per tutti i provider esterni (T10: vonage/bird/telegram/discord, e ai-guard).
+Pattern operativo:
+- **Gateway-seam**: incapsula l'SDK esterno dietro una piccola interfaccia (`TwilioVerifyGateway`) con un'impl reale (`Rest...Gateway`) + una `Fake...Gateway`. Così la suite offline NON tocca l'API, e PHPStan max regge (l'SDK Twilio espone `@property`, ma per i valori magici usare un helper `toString(mixed)` che **lancia** su non-scalare → catturato dal provider come errore generico).
+- **Mai far uscire eccezioni**: il provider cattura `\Throwable` dell'SDK e ritorna un risultato di fallimento generico (`provider_error`) così il router può fare fallback. Niente internals/PII nei log.
+- **Status mapping esplicito**: mappare gli stati del provider con un `match` (es. solo `pending` = sfida viva; stati inattesi = fail), non un binario approved/else.
+- **Client non autenticato MAI**: bindare il client reale solo se le credenziali sono presenti, e solo se non già bound (`! $app->bound(...)`), così in test un fake bindato in `defineEnvironment` vince.
+- **Live tests opt-in**: gruppo Pest `live` in `tests/Live`, gating su `REBEL_<PROVIDER>_LIVE=1` **+** credenziali presenti (`getenv`), altrimenti `markTestSkipped`. NON auto-caricare il `.env` del package (eviti invii reali ad ogni `composer test`). Credenziali in `.env` git-ignored localmente, secrets in CI. Numero di test in `.env` (mai in md). Provato: il live test invia un SMS Twilio Verify reale e ritorna SID `VE...` + status pending.
+- **CI**: pinnare sia `illuminate/contracts` SIA `illuminate/support` alla versione di matrice (evita install misto 12/13). Script composer `check`: usare `pint --test` diretto, non `@pint --test`.
