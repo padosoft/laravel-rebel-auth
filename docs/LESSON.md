@@ -86,3 +86,17 @@ Contesto: le review (locale + Codex su PR) hanno trovato bug di sicurezza ricorr
 ## [2026-06-02] #5 — README didattici (requisito di prodotto)
 Contesto: indicazione utente. L'ecosistema è complesso/enterprise.
 Lezione: ogni README deve essere **prolisso e didattico** per junior/non-esperti di auth: spiegare cosa fa, come funziona (passo-passo + ASCII), come si monta, OGNI opzione di config (tabella), e **molti esempi** (≥4-6 per package). Glossario dei termini (OTP, step-up, AAL, passkey, dynamic linking). Meglio "troppo spiegato" che criptico.
+
+## [2026-06-03] #13 — Step-up: bug reali trovati dalla review Copilot locale (T4)
+Contesto: 2 round di review locale su `laravel-rebel-step-up` (≈78 crediti, 8 fix). Tutti bug reali, non nitpick.
+Lezioni operative (validazione conferme & SCA):
+- **Device binding asimmetrico**: un `when($deviceId !== null, …)` SENZA ramo else fa sì che un contesto con `deviceId=null` salti il filtro e riusi conferme device-bound. Il binding va reso **simmetrico**: `null ⇒ whereNull('device_id')`, valorizzato ⇒ `where('device_id', …)`.
+- **Assurance vs policy CORRENTE**: una conferma valida entro TTL non basta; va ri-verificato che l'assurance *raggiunta e salvata* soddisfi la policy **attuale** (se la alzi, le conferme vecchie più deboli devono decadere). Salva su DB: `achieved_assurance` + `achieved_phishing_resistant` + `achieved_restricted`, poi ricostruisci `AssuranceLevel` e chiama `satisfies()`.
+- **Canonical anti delimiter-injection**: per il binding SCA NON concatenare i campi con un separatore (`implode('|', …)`): `payee="A|B"`+`orderRef="C"` collide con `payee="A"`+`orderRef="B|C"`. Usa **`json_encode` a chiavi ordinate** con `JSON_THROW_ON_ERROR` (fail-closed).
+- **`start()` atomico**: se il driver lancia dopo aver creato il challenge `pending`, annullalo (`Cancelled`) in un `try/catch` interno che **non maschera** l'eccezione originale (`catch(\Throwable){}` sul cancel-save).
+- **Fail-closed sugli enum**: `Aal::from($valoreDB)` lancia `ValueError` su dati corrotti → usa `Aal::tryFrom()` e tratta `null` come "non valido".
+- **`subjectId()` fail-fast**: identifier non scalare → **eccezione**, mai `''` (altrimenti più utenti condividono lo stesso subject e si scambiano le conferme).
+
+## [2026-06-03] #14 — LICENSE Apache di default vs `license: MIT` in composer.json
+Contesto: i repo creati su GitHub hanno il file **LICENSE Apache-2.0** di default, ma `composer.json` (e i README) dichiarano **MIT** su TUTTI i package. Mismatch presente anche nei già rilasciati `core` e `email-otp` (v0.1.0).
+Lezione: allineare il file `LICENSE` a **MIT** ad ogni nuovo package (fatto per step-up). **TODO suite-wide**: riconciliare `core` e `email-otp` a MIT con un commit `:memo:` (no nuova release necessaria, è solo il file LICENSE). Verificare sempre `Get-Content LICENSE -TotalCount 1` vs `composer.json` quando si skeletona un repo.
