@@ -32,10 +32,12 @@
 | T3 | bridge-fortify | laravel-rebel-bridge-fortify | feat/bridge-fortify | ✅ done (v0.1.0) |
 | T5a | channels | laravel-rebel-channels | feat/channels | ✅ done (v0.1.0) |
 | T5b | channel-twilio | laravel-rebel-channel-twilio | feat/channel-twilio | ✅ done (v0.1.0, live test reale ok) |
-| T6 | admin-api | laravel-rebel-admin-api | feat/admin-api | 🔄 PR #1 (gate) |
-| T7 | admin | laravel-rebel-admin | feat/admin | ⬜ (template utente già fornito → NO stop) |
+| T6 | admin-api | laravel-rebel-admin-api | feat/admin-api | ✅ done (v0.1.0) |
+| T7 | admin | laravel-rebel-admin | feat/admin | 🔄 prossimo (template React/JSX utente) |
 
-**Skeleton repos extra (T10 + demo + auth):** composer.json + provider stub pushati su main di bridge-passkeys, bridge-spatie-otp, channel-bird, channel-discord, channel-telegram, channel-vonage, bot-protection, bridge-laragear-2fa, bridge-otpz, demo (auth già presente). Registrabili su Packagist.
+**✅ TUTTI i 21 package registrati su Packagist (2026-06-03).** Da ora: `composer require padosoft/laravel-rebel-<x>:^0.1` diretto, **niente più blocco `repositories` VCS** nei nuovi package (memoria `all-packages-on-packagist`).
+
+**Template admin (T7):** `C:\Users\lopad\Downloads\laravel-rebel\laravel-rebel-web-panel\project\` — **SPA React/JSX** (Laravel Rebel Admin.html + app/shell/ui/charts/icons.jsx + pages-{monitor,investigate,intel,anomaly}.jsx + data.js + styles*.css + tweaks-panel.jsx) + spec `uploads/admin-panel-template-spec.md`. Da montare come pannello web del package -admin (Blade host + asset Vite, dati reali da admin-api).
 
 ## Note di ripresa
 - Piano completo: `docs/IMPLEMENTATION-PLAN.md` (questo repo) / `C:\Users\lopad\.claude\plans\synchronous-dazzling-lynx.md`.
