@@ -32,7 +32,7 @@
 | T3 | bridge-fortify | laravel-rebel-bridge-fortify | feat/bridge-fortify | ✅ done (v0.1.0) |
 | T5a | channels | laravel-rebel-channels | feat/channels | ✅ done (v0.1.0) |
 | T5b | channel-twilio | laravel-rebel-channel-twilio | feat/channel-twilio | ✅ done (v0.1.0, live test reale ok) |
-| T6 | admin-api | laravel-rebel-admin-api | feat/admin-api | 🔄 in corso |
+| T6 | admin-api | laravel-rebel-admin-api | feat/admin-api | 🔄 PR #1 (gate) |
 | T7 | admin | laravel-rebel-admin | feat/admin | ⬜ (template utente già fornito → NO stop) |
 
 **Skeleton repos extra (T10 + demo + auth):** composer.json + provider stub pushati su main di bridge-passkeys, bridge-spatie-otp, channel-bird, channel-discord, channel-telegram, channel-vonage, bot-protection, bridge-laragear-2fa, bridge-otpz, demo (auth già presente). Registrabili su Packagist.
