@@ -38,9 +38,9 @@
 | T8b | recovery | laravel-rebel-recovery | feat/recovery | ✅ done (v0.1.0) |
 | T9 | ai-guard | laravel-rebel-ai-guard | feat/ai-guard | ✅ done (v0.1.0) |
 | T10 | extra bridges/providers | (8 stub repos) | — | ⬜ on-demand (skeleton pushati, registrabili; impl fuori dal set prioritario) |
-| T11 | auth (meta) | laravel-rebel-auth | feat/meta | 🔄 prossimo (flagship README) |
-| T12 | harvest lessons | (tutti i repo) | — | ⬜ + **FINAL PASS README**: ogni README di OGNI package deve avere la card-battle/confronto feature **inclusa Shopify** (memoria `readme-comparison-tables`). Verificare tutti prima di dichiarare la roadmap completa. |
-| T13 | demo | laravel-rebel-demo | — | ⬜ app integrazione — **install+attiva+testa TUTTI i package** con **Playwright FE+BE** (browser reale). Se trovi bug in un package: **patcha il package → ripubblica (tag patch) → composer update sul demo → ri-testa**, loop fino a verde. Garanzia pre-cliente (memoria `t13-demo-requirements`). |
+| T11 | auth (meta) | laravel-rebel-auth | feat/meta | ✅ done (v0.1.0) — flagship README + suite-wiring smoke test, Codex CI-matrix fix applied |
+| T12 | harvest lessons | (tutti i repo) | — | ✅ done — **FINAL PASS README Shopify** completato su tutti gli 11 package shippati (colonna Shopify + footnote, CI verde su main); **backfill CI matrix** riga `php 8.3 × laravel 13` su tutti i 10 repo + meta (scoperta da review Codex su PR #3); lessons #18-21 in `docs/LESSON.md`. Stub T10 + demo README: da fare quando si implementano (memoria `readme-comparison-tables`). |
+| T13 | demo | laravel-rebel-demo | — | 🔄 in corso — app integrazione — **install+attiva+testa TUTTI i package** con **Playwright FE+BE** (browser reale). Se trovi bug in un package: **patcha il package → ripubblica (tag patch) → composer update sul demo → ri-testa**, loop fino a verde. Garanzia pre-cliente (memoria `t13-demo-requirements`). |
 
 **Nota T7 follow-up:** le 8 sezioni "endpoint pending" (funnels, channels, providers, devices, risk-rules, anomalies, ai, compliance) richiedono i rispettivi endpoint su `admin-api` (estendere admin-api in una minor) + widget JS + Playwright E2E. Spec completa in `laravel-rebel-admin/docs/admin-panel-template-spec.md`.
 
