@@ -8,7 +8,11 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 /**
- * Skeleton iniziale di padosoft/laravel-rebel-auth. Implementazione in arrivo.
+ * Service provider for the padosoft/laravel-rebel-auth meta-package.
+ *
+ * The meta-package does not register services of its own: its job is to pull in
+ * the whole Rebel suite via Composer. Each member package self-registers through
+ * its own auto-discovered service provider.
  */
 final class RebelAuthServiceProvider extends PackageServiceProvider
 {

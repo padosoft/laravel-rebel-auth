@@ -39,8 +39,8 @@
 | T9 | ai-guard | laravel-rebel-ai-guard | feat/ai-guard | ✅ done (v0.1.0) |
 | T10 | extra bridges/providers | (8 stub repos) | — | ⬜ on-demand (skeleton pushati, registrabili; impl fuori dal set prioritario) |
 | T11 | auth (meta) | laravel-rebel-auth | feat/meta | 🔄 prossimo (flagship README) |
-| T12 | harvest lessons | (tutti i repo) | — | ⬜ |
-| T13 | demo | laravel-rebel-demo | — | ⬜ app integrazione |
+| T12 | harvest lessons | (tutti i repo) | — | ⬜ + **FINAL PASS README**: ogni README di OGNI package deve avere la card-battle/confronto feature **inclusa Shopify** (memoria `readme-comparison-tables`). Verificare tutti prima di dichiarare la roadmap completa. |
+| T13 | demo | laravel-rebel-demo | — | ⬜ app integrazione — **install+attiva+testa TUTTI i package** con **Playwright FE+BE** (browser reale). Se trovi bug in un package: **patcha il package → ripubblica (tag patch) → composer update sul demo → ri-testa**, loop fino a verde. Garanzia pre-cliente (memoria `t13-demo-requirements`). |
 
 **Nota T7 follow-up:** le 8 sezioni "endpoint pending" (funnels, channels, providers, devices, risk-rules, anomalies, ai, compliance) richiedono i rispettivi endpoint su `admin-api` (estendere admin-api in una minor) + widget JS + Playwright E2E. Spec completa in `laravel-rebel-admin/docs/admin-panel-template-spec.md`.
 
