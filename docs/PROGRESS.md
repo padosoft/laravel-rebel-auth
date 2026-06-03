@@ -33,7 +33,7 @@
 | T5a | channels | laravel-rebel-channels | feat/channels | ✅ done (v0.1.0) |
 | T5b | channel-twilio | laravel-rebel-channel-twilio | feat/channel-twilio | ✅ done (v0.1.0, live test reale ok) |
 | T6 | admin-api | laravel-rebel-admin-api | feat/admin-api | ✅ done (v0.1.0) |
-| T7 | admin | laravel-rebel-admin | feat/admin | 🔄 prossimo (template React/JSX utente) |
+| T7 | admin | laravel-rebel-admin | feat/admin | 🔄 PR #2 (gate) — shell + 2 sezioni live; resto "endpoint pending" |
 
 **✅ TUTTI i 21 package registrati su Packagist (2026-06-03).** Da ora: `composer require padosoft/laravel-rebel-<x>:^0.1` diretto, **niente più blocco `repositories` VCS** nei nuovi package (memoria `all-packages-on-packagist`).
 
