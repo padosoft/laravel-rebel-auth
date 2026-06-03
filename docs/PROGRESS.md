@@ -33,7 +33,7 @@
 | T5a | channels | laravel-rebel-channels | feat/channels | ✅ done (v0.1.0) |
 | T5b | channel-twilio | laravel-rebel-channel-twilio | feat/channel-twilio | ✅ done (v0.1.0, live test reale ok) |
 | T6 | admin-api | laravel-rebel-admin-api | feat/admin-api | ✅ done (v0.1.0) |
-| T7 | admin | laravel-rebel-admin | feat/admin | ✅ done (v0.1.0) — shell + Overview/Audit live; resto "endpoint pending" |
+| T7 | admin | laravel-rebel-admin | feat/admin | ✅ done — **v0.1.3: FULL template SPA** (React, ported from the design template) su **dati live admin-api**; build pura-JS (Babel+UMD, niente bundler nativo). admin-api **v0.1.3** = contratto completo (~26 endpoint, risk-rules persistiti, anomalies/devices actions, compliance...). Montato+verificato nel demo. (v0.1.0 era shell semplificata.) |
 | T8a | sessions | laravel-rebel-sessions | feat/sessions | ✅ done (v0.1.0) |
 | T8b | recovery | laravel-rebel-recovery | feat/recovery | ✅ done (v0.1.0) |
 | T9 | ai-guard | laravel-rebel-ai-guard | feat/ai-guard | ✅ done (v0.1.0) |
