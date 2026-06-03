@@ -30,8 +30,8 @@
 | T2 | email-otp | laravel-rebel-email-otp | feat/email-otp | ✅ done (v0.1.0) |
 | T4 | step-up | laravel-rebel-step-up | feat/step-up | ✅ done (v0.1.0) |
 | T3 | bridge-fortify | laravel-rebel-bridge-fortify | feat/bridge-fortify | ✅ done (v0.1.0) |
-| T5a | channels | laravel-rebel-channels | feat/channels | 🔄 PR #1 (gate) |
-| T5b | channel-twilio | laravel-rebel-channel-twilio | feat/channel-twilio | ⬜ (dopo channels) |
+| T5a | channels | laravel-rebel-channels | feat/channels | ✅ done (v0.1.0) |
+| T5b | channel-twilio | laravel-rebel-channel-twilio | feat/channel-twilio | 🔄 in corso |
 | T6 | admin-api | laravel-rebel-admin-api | feat/admin-api | ⬜ |
 | ⏸️ | STOP prima di admin → chiedere path template | | | |
 
