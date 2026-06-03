@@ -1,6 +1,6 @@
 {
   "name": "padosoft/laravel-rebel-auth",
-  "description": "Meta-package: installa e tiene insieme la suite padosoft/laravel-rebel-* (enterprise auth control plane).",
+  "description": "Meta-package for the padosoft/laravel-rebel-* enterprise authentication control plane: passwordless email-OTP, passkey-first, risk-based step-up with PSD2/SCA, channels, sessions, recovery, anomaly detection and a web admin panel — installs and ties the whole suite together.",
   "license": "MIT",
   "keywords": [
     "laravel",
@@ -23,7 +23,27 @@
     "illuminate/support": "^12.0|^13.0",
     "spatie/laravel-package-tools": "^1.92",
     "padosoft/laravel-rebel-core": "^0.1",
-    "padosoft/laravel-rebel-email-otp": "^0.1"
+    "padosoft/laravel-rebel-email-otp": "^0.1",
+    "padosoft/laravel-rebel-step-up": "^0.1",
+    "padosoft/laravel-rebel-bridge-fortify": "^0.1",
+    "padosoft/laravel-rebel-channels": "^0.1",
+    "padosoft/laravel-rebel-admin-api": "^0.1",
+    "padosoft/laravel-rebel-admin": "^0.1",
+    "padosoft/laravel-rebel-sessions": "^0.1",
+    "padosoft/laravel-rebel-recovery": "^0.1",
+    "padosoft/laravel-rebel-ai-guard": "^0.1"
+  },
+  "suggest": {
+    "padosoft/laravel-rebel-channel-twilio": "Twilio Verify provider (SMS/WhatsApp/voice) for laravel-rebel-channels.",
+    "padosoft/laravel-rebel-channel-vonage": "Vonage channel provider for laravel-rebel-channels.",
+    "padosoft/laravel-rebel-channel-bird": "Bird (MessageBird) channel provider for laravel-rebel-channels.",
+    "padosoft/laravel-rebel-channel-telegram": "Telegram channel provider for laravel-rebel-channels.",
+    "padosoft/laravel-rebel-channel-discord": "Discord channel provider for laravel-rebel-channels.",
+    "padosoft/laravel-rebel-bridge-passkeys": "Passkey/WebAuthn bridge.",
+    "padosoft/laravel-rebel-bridge-spatie-otp": "Bridge to spatie/laravel-one-time-passwords.",
+    "padosoft/laravel-rebel-bridge-laragear-2fa": "Bridge to laragear/two-factor.",
+    "padosoft/laravel-rebel-bridge-otpz": "Bridge to the otpz package.",
+    "padosoft/laravel-rebel-bot-protection": "Bot-protection (CAPTCHA/Turnstile) bridge."
   },
   "require-dev": {
     "larastan/larastan": "^3.0",
@@ -52,7 +72,12 @@
   "scripts": {
     "test": "pest",
     "phpstan": "phpstan analyse --memory-limit=512M",
-    "pint": "pint"
+    "pint": "pint",
+    "check": [
+      "pint --test",
+      "@phpstan",
+      "@test"
+    ]
   },
   "config": {
     "sort-packages": true,
