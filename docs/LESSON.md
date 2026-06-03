@@ -100,3 +100,7 @@ Lezioni operative (validazione conferme & SCA):
 ## [2026-06-03] #14 — LICENSE Apache di default vs `license: MIT` in composer.json
 Contesto: i repo creati su GitHub hanno il file **LICENSE Apache-2.0** di default, ma `composer.json` (e i README) dichiarano **MIT** su TUTTI i package. Mismatch presente anche nei già rilasciati `core` e `email-otp` (v0.1.0).
 Lezione: allineare il file `LICENSE` a **MIT** ad ogni nuovo package (fatto per step-up). **TODO suite-wide**: riconciliare `core` e `email-otp` a MIT con un commit `:memo:` (no nuova release necessaria, è solo il file LICENSE). Verificare sempre `Get-Content LICENSE -TotalCount 1` vs `composer.json` quando si skeletona un repo.
+
+## [2026-06-03] #15 — Mai fermarsi su errori API/rate-limit/connessione: wait 60s + retry in loop
+Contesto: richiesta esplicita utente (automode lungo, goal "100% di T13"). Un errore transitorio NON deve terminare la sessione.
+Regola operativa: su **rate limit (429)**, **errore API/5xx/timeout**, o **connessione assente** (qualsiasi tool, modello, `gh`, `composer`, rete) → **non fermarsi**: attendere ~60s e **ritentare in loop** finché l'accesso torna, poi riprendere da dove si era. Usare `ScheduleWakeup` (~60s) per farsi re-invocare, o un retry-loop shell per le chiamate shell. Distinguere dagli errori di logica reali (test rosso, 404/422 da input errato): quelli si fixano, non si ritentano alla cieca. Vale per tutte le sessioni (salvato anche in auto-memory `retry-on-api-errors`).
