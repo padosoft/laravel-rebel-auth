@@ -61,6 +61,16 @@ Contesto: review sul diff core (~1300 righe, ~25 credits, ~1.5min). Findings uti
 Contesto: `email-otp` dipende da `padosoft/laravel-rebel-core` non ancora su Packagist.
 Lezione: nel `composer.json` del package dipendente aggiungere `"repositories": [{"type":"vcs","url":"https://github.com/padosoft/laravel-rebel-core"}]` e richiedere `"padosoft/laravel-rebel-core": "^0.1"`. Composer risolve dal **tag GitHub** (v0.1.0). Funziona **in locale e in CI** (repo pubblico, nessuna auth). Quando i package saranno su Packagist si potranno togliere le `repositories`. Il `TestCase` del package dipendente deve registrare **entrambi** i provider (core + package) e impostare un pepper di test (`rebel-core.peppers`). composer update verde, skeleton test verde.
 
+## [2026-06-03] #11 — Pattern Eloquent + PHPStan max (da T2 email-otp)
+Contesto: l'engine OTP usa un model Eloquent → diverse insidie a level max.
+Lezioni:
+- **PHPStan OOM**: model con cast/relazioni esplode la memoria → nel composer script usare `phpstan analyse --memory-limit=512M` (128M default insufficiente). Adottare per tutti i package con model.
+- **Proprietà magiche**: a level max servono `@property` per OGNI attributo del model usato (altrimenti `property.notFound`). Meglio `@property` tipizzati che `getAttribute()` (ritorna `mixed` → rompe i parametri tipizzati a valle).
+- **`Connection::transaction`**: larastan inferisce il tipo di ritorno dal closure SOLO sul tipo concreto `Illuminate\Database\Connection` (via `DatabaseManager->connection()`), **non** su `ConnectionInterface` (resta `mixed`). Iniettare `DatabaseManager`, fare `->connection()->transaction(fn(): T => ...)`.
+- **Cast immutable_datetime**: la proprietà è `CarbonImmutable`; assegnare un `DateTimeImmutable` (da `ClockInterface::now()`) dà errore → `CarbonImmutable::instance($now)`.
+- **Migrazioni in test di package dipendenti**: il `TestCase` deve `loadMigrationsFrom` ANCHE le migrazioni della dipendenza (es. core) da `vendor/.../database/migrations` (spatie `hasMigration` pubblica ma non auto-carica in test).
+- **Catturare l'OTP nei test**: `Notification::fake()` + `assertSentOnDemand(EmailOtpNotification::class, fn($n)=>...$code=$n->code...)`.
+
 ## [2026-06-02] #5 — README didattici (requisito di prodotto)
 Contesto: indicazione utente. L'ecosistema è complesso/enterprise.
 Lezione: ogni README deve essere **prolisso e didattico** per junior/non-esperti di auth: spiegare cosa fa, come funziona (passo-passo + ASCII), come si monta, OGNI opzione di config (tabella), e **molti esempi** (≥4-6 per package). Glossario dei termini (OTP, step-up, AAL, passkey, dynamic linking). Meglio "troppo spiegato" che criptico.
