@@ -18,9 +18,9 @@
 ## Cosa sto facendo ORA
 **T1 `core` ✅ v0.1.0** · **T2 `email-otp` ✅ v0.1.0** · **T4 `step-up` → PR #1 aperta** (15 test Pest verdi, PHPStan max, Pint; 8 fix da 2 round review Copilot locale: device binding simmetrico, assurance vs policy corrente, canonical JSON anti-injection, start() atomico, Aal::tryFrom fail-closed, subjectId fail-fast, TransactionContext validation; README didattico + .env.example + CHANGELOG; LICENSE→MIT).
 
-**Attesa gate A2.b su PR #1 step-up:** CI (matrix 8.3/8.4/8.5 × L12/13) + review bot. Poi merge squash → tag **v0.1.0** → release.
+**T4 step-up ✅ v0.1.0 mergeato+rilasciato.** **T3 bridge-fortify → PR #1 in gate** (CI verde, fix da review Codex+Copilot applicate, in attesa merge). Docs di core/email-otp/step-up tradotti in INGLESE (agenti background, pushati su main) + composer.json description EN.
 
-**Prossimo dopo merge step-up: T3 `laravel-rebel-bridge-fortify`** (branch `feat/bridge-fortify`). Solo codice (no UI). Driver Fortify (password-confirm web-only, passkey, totp) + event mapper + passkey-first login + driver step-up `fortify_passkey_confirm`/`fortify_totp` (implementano `StepUpDriver` di step-up). Feature-detect `class_exists(Fortify)`. Dipende da core+step-up (VCS).
+**Prossimo dopo merge bridge-fortify: T5 `channels` + `channel-twilio`** (live Twilio). Nota naming stub: `channel-twilio` usa `Padosoft\Rebel\Channel\Twilio` + `RebelTwilioServiceProvider`.
 
 ## Tabella macro-task (questo round)
 | # | Package | Repo | Branch | Stato |
@@ -28,8 +28,8 @@
 | T0 | governance | laravel-rebel-auth | chore/governance | ✅ done (PR #1) |
 | T1 | core | laravel-rebel-core | feat/core | ✅ done (v0.1.0) |
 | T2 | email-otp | laravel-rebel-email-otp | feat/email-otp | ✅ done (v0.1.0) |
-| T4 | step-up | laravel-rebel-step-up | feat/step-up | 🔄 PR #1 (gate) |
-| T3 | bridge-fortify | laravel-rebel-bridge-fortify | feat/bridge-fortify | ⬜ (dopo step-up) |
+| T4 | step-up | laravel-rebel-step-up | feat/step-up | ✅ done (v0.1.0) |
+| T3 | bridge-fortify | laravel-rebel-bridge-fortify | feat/bridge-fortify | 🔄 PR #1 (gate) |
 | T5a | channels | laravel-rebel-channels | feat/channels | ⬜ |
 | T5b | channel-twilio | laravel-rebel-channel-twilio | feat/channel-twilio | ⬜ |
 | T6 | admin-api | laravel-rebel-admin-api | feat/admin-api | ⬜ |
