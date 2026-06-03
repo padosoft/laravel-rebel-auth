@@ -33,7 +33,14 @@
 | T5a | channels | laravel-rebel-channels | feat/channels | ✅ done (v0.1.0) |
 | T5b | channel-twilio | laravel-rebel-channel-twilio | feat/channel-twilio | ✅ done (v0.1.0, live test reale ok) |
 | T6 | admin-api | laravel-rebel-admin-api | feat/admin-api | ✅ done (v0.1.0) |
-| T7 | admin | laravel-rebel-admin | feat/admin | 🔄 PR #2 (gate) — shell + 2 sezioni live; resto "endpoint pending" |
+| T7 | admin | laravel-rebel-admin | feat/admin | ✅ done (v0.1.0) — shell + Overview/Audit live; resto "endpoint pending" |
+| T8 | sessions+recovery | laravel-rebel-sessions / -recovery | feat/sessions-recovery | 🔄 prossimo |
+| T9 | ai-guard | laravel-rebel-ai-guard | feat/ai-guard | ⬜ |
+| T11 | auth (meta) | laravel-rebel-auth | feat/meta | ⬜ flagship README |
+| T12 | harvest lessons | (tutti i repo) | — | ⬜ |
+| T13 | demo | laravel-rebel-demo | — | ⬜ app integrazione |
+
+**Nota T7 follow-up:** le 8 sezioni "endpoint pending" (funnels, channels, providers, devices, risk-rules, anomalies, ai, compliance) richiedono i rispettivi endpoint su `admin-api` (estendere admin-api in una minor) + widget JS + Playwright E2E. Spec completa in `laravel-rebel-admin/docs/admin-panel-template-spec.md`.
 
 **✅ TUTTI i 21 package registrati su Packagist (2026-06-03).** Da ora: `composer require padosoft/laravel-rebel-<x>:^0.1` diretto, **niente più blocco `repositories` VCS** nei nuovi package (memoria `all-packages-on-packagist`).
 
