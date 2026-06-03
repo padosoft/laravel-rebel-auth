@@ -6,8 +6,13 @@
 - **Sessione:** 2026-06-03
 - **Round automode:** **GOAL = vai al 100% di T13**, senza stop. Per `admin` (T7) costruisco la UI dal template utente `Laravel Rebel Admin.html` in `C:\Users\lopad\Downloads\laravel-rebel\laravel-rebel-web-panel`.
 - **Secrets pronti (in `.env` git-ignored, MAI in md/commit):** Twilio in `laravel-rebel-channel-twilio/.env`, Mailtrap in `laravel-rebel-email-otp/.env`. Numero test utente: solo in `.env`. Repo `laravel-rebel-demo` clonato (T13).
-- **Macro-task in corso:** **T4 — step-up** (branch `feat/step-up`) → **PR #1 APERTA**, in attesa CI + review bot (@copilot richiesto via REST). T0/T1/T2 ✅ mergeati.
-- **Ordine T3/T4 invertito:** `step-up` (T4) costruito PRIMA di `bridge-fortify` (T3) perché il bridge dipende dal contratto `StepUpDriver` definito qui.
+- **Macro-task in corso:** **T3 — bridge-fortify** (PROSSIMO). T0/T1/T2/**T4** ✅ mergeati+rilasciati.
+- **Ordine T3/T4 invertito:** `step-up` (T4) costruito PRIMA di `bridge-fortify` (T3) perché il bridge dipende dal contratto `StepUpDriver` definito in step-up.
+- **⚠️ Naming stub esistenti (verificato da agente):** alcuni repo-skeleton già pushati usano namespace/provider DIVERSI dalla convenzione attesa — allinearsi a QUELLI quando si implementa:
+  - `bridge-fortify` → namespace `Padosoft\Rebel\Bridge\Fortify`, provider `RebelFortifyBridgeServiceProvider` (NON `BridgeFortify`).
+  - `channel-twilio` → namespace `Padosoft\Rebel\Channel\Twilio`, provider `RebelTwilioServiceProvider` (NON `ChannelTwilio`).
+  - Gli altri (channels, admin-api, admin, sessions, recovery, ai-guard, auth) seguono la convenzione standard `Padosoft\Rebel\<Studly>` + `Rebel<Studly>ServiceProvider`.
+- **Packagist:** tutti i 9 repo-skeleton (bridge-fortify, channels, channel-twilio, admin-api, admin, sessions, recovery, ai-guard, auth) hanno composer.json valido **già committato e pushato su origin/main** → registrabili ora.
 - **Gate review:** `@copilot` reviewer SI usa via REST (`gh api ... /requested_reviewers -f "reviewers[]=copilot-pull-request-reviewer[bot]"`); LESSON #4 superato. Backup: review Copilot LOCALE (`scripts/cr.ps1`).
 
 ## Cosa sto facendo ORA
