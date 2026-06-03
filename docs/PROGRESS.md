@@ -34,9 +34,9 @@
 | T5b | channel-twilio | laravel-rebel-channel-twilio | feat/channel-twilio | ✅ done (v0.1.0, live test reale ok) |
 | T6 | admin-api | laravel-rebel-admin-api | feat/admin-api | ✅ done (v0.1.0) |
 | T7 | admin | laravel-rebel-admin | feat/admin | ✅ done (v0.1.0) — shell + Overview/Audit live; resto "endpoint pending" |
-| T8a | sessions | laravel-rebel-sessions | feat/sessions | 🔄 PR #1 (gate) |
-| T8b | recovery | laravel-rebel-recovery | feat/recovery | ⬜ (dopo sessions) |
-| T9 | ai-guard | laravel-rebel-ai-guard | feat/ai-guard | ⬜ |
+| T8a | sessions | laravel-rebel-sessions | feat/sessions | ✅ done (v0.1.0) |
+| T8b | recovery | laravel-rebel-recovery | feat/recovery | ✅ done (v0.1.0) |
+| T9 | ai-guard | laravel-rebel-ai-guard | feat/ai-guard | 🔄 prossimo |
 | T11 | auth (meta) | laravel-rebel-auth | feat/meta | ⬜ flagship README |
 | T12 | harvest lessons | (tutti i repo) | — | ⬜ |
 | T13 | demo | laravel-rebel-demo | — | ⬜ app integrazione |
