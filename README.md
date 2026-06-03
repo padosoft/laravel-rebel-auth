@@ -227,6 +227,23 @@ competitor comparison, and a full local + dual-bot (Codex + Copilot) review on e
 
 ---
 
+## 🔋 Vibe coding with batteries included
+
+Every package in the suite ships **AI batteries** — so you (and your AI agent) extend it correctly
+on the first try:
+
+- **`CLAUDE.md`** — a concise AI working guide (purpose, conventions, architecture, how to extend,
+  Definition of Done). Plain Markdown, so Claude Code, Cursor, Copilot and Codex all read it.
+- **`AGENTS.md`** — the agent/workflow contract (branch → PR → CI → tag/release, the gates).
+- **`.claude/skills/rebel-package-dev`** — an invocable skill encoding the suite's TDD loop, the
+  **PHPStan-level-max** recipes, the security/telemetry rules, and the release discipline.
+
+Open any repo in your AI editor and just start — the rules, guardrails and extension recipes come
+with it. The source-of-truth templates + the rollout plan live in
+[`docs/ai-batteries/`](docs/ai-batteries/).
+
+---
+
 ## License
 
 MIT — see [LICENSE](LICENSE). Built by [Padosoft](https://www.padosoft.com).
