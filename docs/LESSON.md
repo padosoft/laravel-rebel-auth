@@ -104,3 +104,10 @@ Lezione: allineare il file `LICENSE` a **MIT** ad ogni nuovo package (fatto per 
 ## [2026-06-03] #15 — Mai fermarsi su errori API/rate-limit/connessione: wait 60s + retry in loop
 Contesto: richiesta esplicita utente (automode lungo, goal "100% di T13"). Un errore transitorio NON deve terminare la sessione.
 Regola operativa: su **rate limit (429)**, **errore API/5xx/timeout**, o **connessione assente** (qualsiasi tool, modello, `gh`, `composer`, rete) → **non fermarsi**: attendere ~60s e **ritentare in loop** finché l'accesso torna, poi riprendere da dove si era. Usare `ScheduleWakeup` (~60s) per farsi re-invocare, o un retry-loop shell per le chiamate shell. Distinguere dagli errori di logica reali (test rosso, 404/422 da input errato): quelli si fixano, non si ritentano alla cieca. Vale per tutte le sessioni (salvato anche in auto-memory `retry-on-api-errors`).
+
+## [2026-06-03] #16 — README/doc IN INGLESE + tabella comparativa ✅/❌ vs concorrenti
+Contesto: correzione utente. I primi 3 README (core, email-otp, step-up) erano stati scritti in ITALIANO → vanno in INGLESE (package pubblici, audience internazionale).
+Regole operative (valgono per TUTTI i package, vecchi e nuovi):
+1. **Lingua = INGLESE** per README, CHANGELOG, `.env.example`, e d'ora in poi anche i commenti/PHPDoc del codice. Mantenere la stessa profondità didattica (glossario, ≥4-6 esempi, tabelle config complete), solo in inglese. (Memoria `docs-in-english`.)
+2. **Tabella comparativa obbligatoria** in ogni README: confronto coi concorrenti REALI che fanno cose simili — le NOSTRE feature con spunta verde ✅, quelle che mancano ai concorrenti con ✗ rossa ❌ (restare onesti: se un concorrente ha davvero una feature, non mettere una X falsa). Mostra visivamente che Rebel è più completo/potente. (Memoria `readme-comparison-tables`.)
+Fix in corso: traduzione in inglese dei README/doc già fatti (core, email-otp, step-up) via agenti in background.
