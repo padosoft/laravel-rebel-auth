@@ -13,20 +13,17 @@
 - **Novità piano:** READMEs didattici + setup provider/`.env.example` su tutti i package; suite test "live" (Twilio/Mailtrap free tier, secrets CI); nuovo package **T13 `laravel-rebel-demo`** (app L13 integrazione, cresce incrementale).
 
 ## Cosa sto facendo ORA
-**T1 `core` ✅ COMPLETO** (v0.1.0). **Inter-package deps via VCS validate** (email-otp→core).
+**T1 `core` ✅ v0.1.0** · **T2 `email-otp` ✅ v0.1.0** (31 test, CI verde, review Codex+Copilot applicate, mergeato+release). Pipeline completa provata su 2 package.
+**Nota Playwright:** per email-otp (UI a 2 form) coperto da test HTTP feature; Playwright browser-E2E consolidato nel package **-admin** (UI ricca). Documentato nel commit T2.7.
 
-**T2 `laravel-rebel-email-otp`** (branch `feat/email-otp`) — in corso, 21 test verdi, PHPStan max (512M), Pint:
-- ✅ T2.0 skeleton + dep core(VCS) · ✅ T2.1 migration · ✅ T2.2 generator CSPRNG
-- ✅ T2.3 Start (anti-enum timing, idempotency, 1-active, delayed subject) · ✅ T2.4 Verify (atomico/single-use/block) · ✅ T2.5 Resend (cooldown/max) · ✅ T2.6 Notification queued + RebelEmailOtp facade
-**Prossimo:** T2.7 Blade views (login/verify) + Vite + **Playwright E2E** (prima volta: setup testbench skeleton app) · T2.6b prune command · T2.8 README "wow" (+ Web Admin Panel screenshot) → PR `feat/email-otp→main` (review @copilot via REST) → tag v0.1.0. Mailtrap `.env` per test "live".
-Sottotask: T2.1 migration challenge (ULID, code_hmac+code_salt+key_version+idempotency) · T2.2 generator+hasher · T2.3 StartChallenge (anti-enum timing, idempotency, rate-limit, bot gate) · T2.4 VerifyChallenge atomico (LoginResult web|token) · T2.5 Resend · T2.6 notification+prune · T2.7 Blade views + Playwright · T2.8 README + PR + tag.
+**Prossimo: T3 `laravel-rebel-bridge-fortify`** (branch `feat/bridge-fortify`). Solo codice (no UI → no Playwright). Driver Fortify (password-confirm web-only, passkey, totp) + event mapper + passkey-first login. Feature-detect `class_exists(Fortify)`; fixture testbench con Fortify. Dipende da core (VCS).
 
 ## Tabella macro-task (questo round)
 | # | Package | Repo | Branch | Stato |
 |---|---|---|---|---|
 | T0 | governance | laravel-rebel-auth | chore/governance | ✅ done (PR #1) |
 | T1 | core | laravel-rebel-core | feat/core | ✅ done (v0.1.0) |
-| T2 | email-otp | laravel-rebel-email-otp | feat/email-otp | ⬜ |
+| T2 | email-otp | laravel-rebel-email-otp | feat/email-otp | ✅ done (v0.1.0) |
 | T3 | bridge-fortify | laravel-rebel-bridge-fortify | feat/bridge-fortify | ⬜ |
 | T4 | step-up | laravel-rebel-step-up | feat/step-up | ⬜ |
 | T5a | channels | laravel-rebel-channels | feat/channels | ⬜ |

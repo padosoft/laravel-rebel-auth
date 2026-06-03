@@ -71,6 +71,18 @@ Lezioni:
 - **Migrazioni in test di package dipendenti**: il `TestCase` deve `loadMigrationsFrom` ANCHE le migrazioni della dipendenza (es. core) da `vendor/.../database/migrations` (spatie `hasMigration` pubblica ma non auto-carica in test).
 - **Catturare l'OTP nei test**: `Notification::fake()` + `assertSentOnDemand(EmailOtpNotification::class, fn($n)=>...$code=$n->code...)`.
 
+## [2026-06-03] #12 — Pattern di sicurezza per gli engine (da review email-otp)
+Contesto: le review (locale + Codex su PR) hanno trovato bug di sicurezza ricorrenti. Da applicare a step-up/channels/recovery.
+- **Tenant null ≠ "tutti i tenant"**: `when($t !== null, where tenant)` lascia la query senza filtro quando null → cross-tenant. Usare SEMPRE il two-callback: `when($t===null, whereNull('tenant_id'), where('tenant_id',$t))`. Vale per invalidazioni, idempotency E **lookup di verifica** (verificare nello stesso contesto-tenant).
+- **Race su limiti** (max_resends...): leggere+decidere dentro `transaction()` con `lockForUpdate`.
+- **Segreti nei job**: notifiche/job che portano OTP/secret → `implements ShouldBeEncrypted` (payload coda cifrato; no leak in `failed_jobs`).
+- **Cooldown**: basarlo su `created_at` (invio), non `updated_at` (i fallimenti di verify lo resettano).
+- **Controller**: legare `challenge_id` alla **sessione** (no brute force diretto di challenge altrui).
+- **Audit completo**: loggare anche i rami early-return (es. `Blocked`).
+- **UI da config**: `maxlength` dell'input OTP dal config `digits` (no hardcoded 6).
+- **Larastan view-string**: `view('ns::x')` triggera la regola su package view non risolvibili → usare `response()->view('ns::x', $data)` nei controller.
+- **Test route in package**: serve `app.key` nel TestCase (`config(['app.key' => 'base64:'.base64_encode(random_bytes(32))])`) per il middleware web; CSRF auto-bypassato nei test.
+
 ## [2026-06-02] #5 — README didattici (requisito di prodotto)
 Contesto: indicazione utente. L'ecosistema è complesso/enterprise.
 Lezione: ogni README deve essere **prolisso e didattico** per junior/non-esperti di auth: spiegare cosa fa, come funziona (passo-passo + ASCII), come si monta, OGNI opzione di config (tabella), e **molti esempi** (≥4-6 per package). Glossario dei termini (OTP, step-up, AAL, passkey, dynamic linking). Meglio "troppo spiegato" che criptico.
