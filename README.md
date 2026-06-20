@@ -1,5 +1,8 @@
 # Laravel Rebel — Enterprise Authentication, the way Shopify wishes it did it
 
+> Official documentation: https://doc.laravel-rebel.padosoft.com
+
+
 > **Passwordless, passkey-first, risk-based authentication for Laravel — a control plane over Fortify.** Email-OTP & passkey login (web + mobile via Sanctum), risk-based step-up with **PSD2/SCA dynamic linking**, multi-channel verification with anti toll-fraud, refresh-token rotation with reuse detection, device trust, recovery codes, anomaly detection with an advisory AI, a web admin panel, and NIST/PSD2/GDPR-aware compliance — modular, multi-tenant, and PHPStan-max across the board.
 
 <p align="center">
@@ -247,3 +250,4 @@ with it. The source-of-truth templates + the rollout plan live in
 ## License
 
 MIT — see [LICENSE](LICENSE). Built by [Padosoft](https://www.padosoft.com).
+
